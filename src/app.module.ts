@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { WebhookController } from "./webhook/webhook.controller";
 import { WebhookService } from "./webhook/webhook.service";
+import { LoggerService } from "./logger/logger.service";
 import { AnomalyDetector } from "./detectors/AnomalyDetector";
 import { TimeBasedPushDetector } from "./detectors/TimeBasedPushDetector";
 import { TeamNameDetector } from "./detectors/TeamNameDetector";
@@ -11,6 +12,7 @@ import { ConsoleNotifier } from "./notifications/ConsoleNotifier";
     controllers: [WebhookController],
     providers: [
         WebhookService,
+        LoggerService,
         {
             provide: "AnomalyDetector",
             useFactory: () => {
@@ -26,5 +28,6 @@ import { ConsoleNotifier } from "./notifications/ConsoleNotifier";
             useClass: ConsoleNotifier,
         },
     ],
+    exports: [LoggerService],
 })
 export class AppModule {}

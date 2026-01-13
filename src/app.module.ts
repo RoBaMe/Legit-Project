@@ -1,33 +1,12 @@
 import { Module } from "@nestjs/common";
-import { WebhookController } from "./webhook/webhook.controller";
-import { WebhookService } from "./webhook/webhook.service";
+import { AppController } from "./app.controller";
+import { WebhookModule } from "./webhook/webhook.module";
 import { LoggerService } from "./logger/logger.service";
-import { AnomalyDetector } from "./detectors/AnomalyDetector";
-import { TimeBasedPushDetector } from "./detectors/TimeBasedPushDetector";
-import { TeamNameDetector } from "./detectors/TeamNameDetector";
-import { RepositoryDeletionDetector } from "./detectors/RepositoryDeletionDetector";
-import { ConsoleNotifier } from "./notifications/ConsoleNotifier";
 
 @Module({
-    controllers: [WebhookController],
-    providers: [
-        WebhookService,
-        LoggerService,
-        {
-            provide: "AnomalyDetector",
-            useFactory: () => {
-                const detector = new AnomalyDetector();
-                detector.registerDetector(new TimeBasedPushDetector());
-                detector.registerDetector(new TeamNameDetector());
-                detector.registerDetector(new RepositoryDeletionDetector());
-                return detector;
-            },
-        },
-        {
-            provide: "ConsoleNotifier",
-            useClass: ConsoleNotifier,
-        },
-    ],
+    imports: [WebhookModule],
+    controllers: [AppController],
+    providers: [LoggerService],
     exports: [LoggerService],
 })
 export class AppModule {}

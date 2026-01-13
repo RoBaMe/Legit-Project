@@ -1,21 +1,16 @@
-import { Controller, Post, Get, Body, Headers, HttpCode, HttpStatus } from "@nestjs/common";
+import { Controller, Post, Body, Headers, HttpCode, HttpStatus } from "@nestjs/common";
 import { WebhookService } from "./webhook.service";
 import { LoggerService } from "../logger/logger.service";
 import { GitHubWebhookEvent } from "../types/github-webhook";
 
-@Controller()
+@Controller("webhook")
 export class WebhookController {
     constructor(
         private readonly webhookService: WebhookService,
         private readonly logger: LoggerService
     ) {}
 
-    @Get("health")
-    getHealth() {
-        return { status: "ok" };
-    }
-
-    @Post("webhook")
+    @Post()
     @HttpCode(HttpStatus.OK)
     handleWebhook(@Body() event: GitHubWebhookEvent, @Headers("x-github-event") eventType: string) {
         try {

@@ -12,8 +12,9 @@ The system detects the following suspicious behaviors:
 
 ## Architecture
 
-The application is designed with extensibility in mind:
+The application is built with NestJS and designed with extensibility in mind:
 
+- **NestJS Framework**: Uses NestJS for a scalable, modular architecture
 - **Detector Pattern**: Each suspicious behavior has its own detector class implementing `IDetector`
 - **Notifier Pattern**: Notification mechanisms implement `INotifier` (currently Console)
 - **Event-Driven**: Receives GitHub webhook events and analyzes them in real-time
@@ -93,7 +94,8 @@ PORT=8080 npm start
 
 ```
 src/
-├── main.ts                 # Entry point
+├── main.ts                 # NestJS bootstrap entry point
+├── app.module.ts          # NestJS root module
 ├── types/
 │   └── github-webhook.ts  # TypeScript interfaces for GitHub events
 ├── detectors/
@@ -105,8 +107,9 @@ src/
 ├── notifications/
 │   ├── INotifier.ts       # Notifier interface
 │   └── ConsoleNotifier.ts # Console notification implementation
-└── server/
-    └── webhook-server.ts  # Express webhook server
+└── webhook/
+    ├── webhook.controller.ts  # NestJS webhook controller
+    └── webhook.service.ts     # NestJS webhook service
 ```
 
 ## Extending the System
@@ -136,7 +139,7 @@ export class MyNewDetector implements IDetector {
 }
 ```
 
-2. Register it in `src/main.ts`:
+2. Register it in `src/app.module.ts` in the `AnomalyDetector` factory:
 
 ```typescript
 detector.registerDetector(new MyNewDetector());
@@ -154,7 +157,7 @@ export class EmailNotifier implements INotifier {
 }
 ```
 
-2. Use it in `src/main.ts` or make it configurable.
+2. Register it in `src/app.module.ts` providers, either as a class provider or update the `ConsoleNotifier` provider.
 
 ## Testing
 

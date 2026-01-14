@@ -50,8 +50,6 @@ NODE_ENV=development
 # Logging
 LOG_LEVEL=info
 
-# Smee.io Configuration (for development webhook forwarding)
-SMEE_URL=https://smee.io/your-channel-id
 ```
 
 ### 3. Build the Project
@@ -75,22 +73,14 @@ npm run build
 
 ### 5. Set Up Local Webhook Tunneling
 
-#### Option A: Using smee.io (Recommended)
+#### Using smee.io (Recommended)
 
 1. Go to https://smee.io/
 2. Click "Start a new channel"
 3. Copy the webhook URL (e.g., `https://smee.io/xxxxx`)
-4. Add it to your `.env` file as `SMEE_URL`
-5. Use the smee.io URL as your GitHub webhook payload URL
+4. Use the smee.io URL as your GitHub webhook payload URL
 
 The application will automatically start the Smee client in development mode.
-
-#### Option B: Using ngrok
-
-1. Download ngrok from https://ngrok.com/
-2. Run: `ngrok http 3000`
-3. Copy the HTTPS forwarding URL (e.g., `https://xxxxx.ngrok.io`)
-4. Use `https://xxxxx.ngrok.io/webhook` as your GitHub webhook payload URL
 
 ### 6. Run the Application
 

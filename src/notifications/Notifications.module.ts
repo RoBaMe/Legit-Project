@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { ConsoleNotifier } from "./ConsoleNotifier";
+import { ConsoleNotifier } from "./ConsoleNotifier.service";
 import { INotifier } from "./INotifier";
 import { NOTIFIERS } from "./NotificationsConstants";
 

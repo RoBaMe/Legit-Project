@@ -4,7 +4,7 @@ import { WebhookEventMap } from "@octokit/webhooks-types";
 import { AnomalyDetection } from "./AnomalyDetection";
 import { WebhookEventType } from "../utils/WebhookEventTypeUtils";
 import { DETECTORS } from "./DetectorsConstants";
-import { LoggerService } from "../logger/LoggerService";
+import { LoggerService } from "../logger/Logger.service";
 
 @Injectable()
 export class WebhookAnomaliesDetector {

@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Headers, HttpCode, HttpStatus } from "@nestjs/common";
-import { WebhookService } from "./WebhookService";
-import { LoggerService } from "../logger/LoggerService";
+import { WebhookService } from "./Webhook.service";
+import { LoggerService } from "../logger/Logger.service";
 import { WebhookEvent } from "@octokit/webhooks-types";
 import { WebhookEventType } from "../utils/WebhookEventTypeUtils";
 

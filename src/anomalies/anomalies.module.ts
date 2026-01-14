@@ -5,7 +5,7 @@ import { TeamNameDetector } from "./detectors/TeamNameDetector.service";
 import { PushTimeDetector } from "./detectors/TimeBasedPushDetector.service";
 import { DetectorBase } from "./detectors/DetectorBase";
 import { DETECTORS } from "./DetectorsConstants";
-import { LoggerService } from "../logger/LoggerService";
+import { LoggerService } from "../logger/Logger.service";
 
 @Module({
     providers: [

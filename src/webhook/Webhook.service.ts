@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { WebhookAnomaliesDetector } from "../anomalies/WebhookAnomaliesDetector.service";
-import { LoggerService } from "../logger/LoggerService";
+import { LoggerService } from "../logger/Logger.service";
 import { WebhookEvent } from "@octokit/webhooks-types";
 import { WebhookEventType } from "../utils/WebhookEventTypeUtils";
 import { NOTIFIERS } from "../notifications/NotificationsConstants";

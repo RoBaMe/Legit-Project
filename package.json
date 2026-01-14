@@ -2,11 +2,11 @@
   "name": "legit-github-anomaly-detector",
   "version": "1.0.0",
   "description": "GitHub webhook-based anomaly detection system",
-  "main": "dist/main.js",
+  "main": "dist/Main.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/main.js",
-    "dev": "dotenv -e .env -- ts-node src/main.ts",
+    "start": "node dist/Main.js",
+    "dev": "dotenv -e .env -- ts-node src/Main.ts",
     "watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\""
@@ -24,6 +24,7 @@
     "@nestjs/platform-express": "^10.3.0",
     "@octokit/webhooks": "^14.2.0",
     "@octokit/webhooks-types": "^7.6.1",
+    "octokit": "^5.0.5",
     "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.1",
     "smee-client": "^5.0.0",

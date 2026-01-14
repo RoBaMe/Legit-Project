@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { AnomalyDetection } from "../AnomalyDetection";
-import { WebhookEventType } from "../../utils/webhook-event-type.utils";
 import { DetectorBase } from "./DetectorBase";
 import { RepositoryEvent } from "@octokit/webhooks-types";
+import { WebhookEventType } from "../../utils/WebhookEventTypeUtils";
 
 //TODO: Add fetch creation time from github api to detect deletion of existing repository
 @Injectable()

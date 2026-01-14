@@ -5,6 +5,7 @@ import { TeamNameDetector } from "./detectors/TeamNameDetector.service";
 import { PushTimeDetector } from "./detectors/TimeBasedPushDetector.service";
 import { DetectorBase } from "./detectors/DetectorBase";
 import { DETECTORS } from "./DetectorsConstants";
+import { LoggerService } from "../logger/LoggerService";
 
 @Module({
     providers: [
@@ -23,6 +24,7 @@ import { DETECTORS } from "./DetectorsConstants";
             inject: [RepositoryDeletionDetector, TeamNameDetector, PushTimeDetector],
         },
         WebhookAnomaliesDetector,
+        LoggerService,
     ],
     exports: [WebhookAnomaliesDetector],
 })

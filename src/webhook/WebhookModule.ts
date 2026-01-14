@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
-import { WebhookController } from "./webhook.controller";
-import { WebhookService } from "./webhook.service";
-import { LoggerService } from "../logger/logger.service";
+import { WebhookController } from "./WebhookController";
+import { WebhookService } from "./WebhookService";
+import { LoggerService } from "../logger/LoggerService";
 import { AnomaliesModule } from "../anomalies/anomalies.module";
 import { NotificationsModule } from "../notifications/NotificationsModule";
 

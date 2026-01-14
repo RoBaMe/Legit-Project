@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { NestFactory } from "@nestjs/core";
 import SmeeClient from "smee-client";
-import { AppModule } from "./app.module";
-import { LoggerService } from "./logger/logger.service";
+import { AppModule } from "./AppModule";
+import { LoggerService } from "./logger/LoggerService";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);

@@ -1,5 +1,5 @@
 import { WebhookEventMap } from "@octokit/webhooks-types";
-import { WebhookEventType } from "../../utils/webhook-event-type.utils";
+import { WebhookEventType } from "../../utils/WebhookEventTypeUtils";
 import { AnomalyDetection } from "../AnomalyDetection";
 
 export type AnomalyDetectionHandler<T extends WebhookEventType = WebhookEventType> = (

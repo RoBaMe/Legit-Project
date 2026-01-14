@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { AnomalyDetection } from "../AnomalyDetection";
-import { WebhookEventType } from "../../utils/webhook-event-type.utils";
+import { WebhookEventType } from "../../utils/WebhookEventTypeUtils";
 import { DetectorBase } from "./DetectorBase";
 import { PushEvent } from "@octokit/webhooks-types";
 

@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { AnomalyDetection } from "../AnomalyDetection";
-import { WebhookEventType } from "../../utils/webhook-event-type.utils";
 import { DetectorBase } from "./DetectorBase";
 import { TeamEvent } from "@octokit/webhooks-types";
+import { WebhookEventType } from "../../utils/WebhookEventTypeUtils";
 
 @Injectable()
 export class TeamNameDetector extends DetectorBase {

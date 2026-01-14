@@ -1,33 +1,30 @@
-import { Injectable, Inject } from "@nestjs/common";
-import { AnomalyDetector } from "../detectors/AnomalyDetector";
-import { INotifier } from "../notifications/INotifier";
+import { Inject, Injectable } from "@nestjs/common";
+import { WebhookAnomaliesDetector } from "../anomalies/WebhookAnomaliesDetector.service";
 import { LoggerService } from "../logger/logger.service";
-import { GitHubWebhookEvent, AnomalyDetectionResult } from "../types/github-webhook";
+import { WebhookEvent } from "@octokit/webhooks-types";
+import { WebhookEventType } from "../utils/webhook-event-type.utils";
+import { NOTIFIERS } from "../notifications/NotificationsConstants";
+import { INotifier } from "../notifications/INotifier";
 
 @Injectable()
 export class WebhookService {
     constructor(
-        @Inject("AnomalyDetector") private readonly detector: AnomalyDetector,
-        @Inject("ConsoleNotifier") private readonly notifier: INotifier,
+        private readonly detector: WebhookAnomaliesDetector,
+        @Inject(NOTIFIERS) private readonly notifiers: INotifier[],
         private readonly logger: LoggerService
     ) {}
 
-    processWebhook(event: GitHubWebhookEvent, eventType: string): { anomaliesDetected: number } {
+    processWebhook(event: WebhookEvent, eventType: WebhookEventType): { anomaliesDetected: number } {
         this.logger.debug(`Processing webhook event: ${eventType}`, "WebhookService");
 
-        // Analyze the event for suspicious behavior
-        const anomalies = this.detector.analyze(event, eventType);
+        const anomalies = this.detector.handleEvent(event, eventType);
 
-        // Notify about each detected anomaly
-        anomalies.forEach((anomaly) => {
-            this.notifier.notify(anomaly);
-        });
+        anomalies.forEach((anomaly) => this.notifiers.forEach((notifier) => notifier.notify(anomaly)));
 
         if (anomalies.length > 0) {
-            this.logger.warn(
-                `Detected ${anomalies.length} anomaly/anomalies in ${eventType} event`,
-                "WebhookService"
-            );
+            this.logger.warn(`Detected ${anomalies.length} anomaly/anomalies in ${eventType} event`, "WebhookService");
+        } else {
+            this.logger.debug(`No anomalies detected in ${eventType} event`, "WebhookService");
         }
 
         return { anomaliesDetected: anomalies.length };
